@@ -1,0 +1,13 @@
+/* Felles ramme for boksen. Samme mål som rammen i rutenett/ (index.html linje 105–106):
+   hvit rand clamp(12px, 2vw, 24px), innhold maks 1240 px, 1 px kant #111111 utenpå (content-box).
+   Brukes av boksens to flater og av konnektor/ når den står alene, så rammene ikke kan bli ulike. */
+:root {
+  --rand: clamp(12px, 2vw, 24px);
+  --rammebredde: 1240px;
+  --kantfarge: #111111;
+  --kant: 1px solid var(--kantfarge);
+}
+.ramme-ytre { background: #FFFFFF; padding: var(--rand); box-sizing: border-box; }
+.ramme { max-width: var(--rammebredde); margin: 0 auto; border: var(--kant); box-sizing: content-box; display: flex; flex-direction: column; }
+.ramme-fot { max-width: var(--rammebredde); margin: 10px auto 0; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px;
+  font-size: 10px; text-transform: uppercase; letter-spacing: 0.04em; }

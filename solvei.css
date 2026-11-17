@@ -1,0 +1,409 @@
+:root {
+  --skrift-serif: "Libre Caslon Condensed", "Georgia", serif;
+  --skrift-brod: "Host Grotesk", "Helvetica Neue", Arial, sans-serif;
+}
+.krem__linje { margin-top: 18px; max-width: 28ch; font: italic 400 clamp(1.125rem, 1.7vw, 1.5rem)/1.3 var(--serif); color: rgb(31 29 27 / .78); text-wrap: balance; }
+.lofte { margin: var(--ramme); background: var(--lilla); color: var(--blekk); border-radius: var(--r);
+  padding: clamp(40px, 6vw, 96px) clamp(24px, 6vw, 96px); }
+.lofte__tekst { font: 400 clamp(1.75rem, 3.6vw, 3.25rem)/1.22 var(--serif); letter-spacing: 0; word-spacing: .04em; max-width: 26ch; text-wrap: pretty; }
+.lofte__tekst em { font-style: italic; }
+.lofte__liten { margin-top: clamp(20px, 2.4vw, 32px); font-size: .875rem; line-height: 1.5; max-width: 44ch; color: rgb(31 29 27 / .78); }
+.faktabokser { display: grid; gap: var(--ramme); align-content: start; }
+.faktaboks { background: var(--kull); border-radius: var(--r); padding: clamp(18px, 1.8vw, 24px); display: grid; gap: 10px; }
+.faktaboks { position: relative; }
+.faktaboks .trinn__ikon { position: absolute; top: clamp(18px, 1.8vw, 24px); right: clamp(18px, 1.8vw, 24px); }
+.faktaboks .etikett { padding-right: 32px; }
+.faktaboks .etikett { color: var(--lys-dempet); }
+.faktaboks__tekst { font-size: .9375rem; line-height: 1.45; color: var(--lys); max-width: 34ch; }
+/* Solvei fra Floka. Oppbygning, farger og skala etter Torleifs design (v3, 8. nov 2026). */
+
+/* Skrifter (fonter-ny/fonter.css): Libre Caslon Condensed til overskrifter og kursiv,
+   Host Grotesk til feite versaler, tall og brødtekst (runde 3: to skriftfamilier). */
+:root {
+  --serif: var(--skrift-serif);
+  --grotesk: var(--skrift-brod);
+  --feit: var(--grotesk);
+
+  --mint: #B8DCC8;
+  --blekk: #1F1D1B;
+  --kull: #2B2826;
+  --oransje: #E58A47;
+  --krem: #EEE6DA;
+  --lilla: #C8BEDC;
+  --lys: #F4EFE7;
+  --lys-dempet: rgb(244 239 231 / .72);
+  --strek-lys: rgb(244 239 231 / .2);
+  --strek-mork: rgb(31 29 27 / .28);
+
+  --kant: clamp(16px, 3.8vw, 56px);   /* sidemarg i toppen og tekstseksjoner */
+  --ramme: clamp(12px, 1.4vw, 20px);  /* luft rundt flatene på mørk bunn */
+  --r: 4px;
+  --fjaer: cubic-bezier(.32, .72, 0, 1);
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; background: var(--blekk); }
+body {
+  margin: 0;
+  background: var(--blekk);
+  color: var(--lys);
+  font: 400 1rem/1.5 var(--grotesk);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: clip;
+}
+h1, h2, h3, p, dl, dd, ol, figure { margin: 0; padding: 0; }
+ol { list-style: none; }
+a { color: inherit; -webkit-tap-highlight-color: transparent; }
+section[id], header[id] { scroll-margin-top: 16px; }
+@media (pointer: fine) { html { overscroll-behavior: none; } }
+@media (pointer: coarse) { .pille { min-height: 44px; padding-inline: 16px; } }
+em { font-style: italic; }
+svg, img { display: block; }
+::selection { background: var(--oransje); color: var(--blekk); }
+
+:focus-visible { outline: 2px solid var(--oransje); outline-offset: 3px; border-radius: 2px; }
+.topp :focus-visible, .kontakt :focus-visible, .krem :focus-visible, .kort--oransje :focus-visible { outline-color: var(--blekk); }
+
+.hopp {
+  position: absolute; left: 12px; top: -60px; z-index: 30;
+  background: var(--blekk); color: var(--lys); padding: 10px 16px; border-radius: 999px; text-decoration: none;
+}
+.hopp:focus { top: 12px; }
+
+/* Fellesbiter */
+.etikett {
+  font: 600 .6875rem/1.3 var(--grotesk);
+  letter-spacing: .14em; text-transform: uppercase;
+  color: var(--oransje);
+}
+.etikett--dempet { color: var(--lys-dempet); }
+.etikett--blekk { color: var(--blekk); }
+
+.piller { display: flex; flex-wrap: wrap; gap: 8px; }
+.pille {
+  display: inline-flex; align-items: center; gap: .4em;
+  min-height: 32px; padding: 6px 14px;
+  border: 1px solid var(--blekk); border-radius: 999px;
+  font: 600 .6875rem/1 var(--grotesk); letter-spacing: .08em; text-transform: uppercase;
+  text-decoration: none; color: var(--blekk);
+  transition: background-color .25s var(--fjaer), color .25s var(--fjaer), transform .1s ease-out;
+  touch-action: manipulation;
+}
+.pille:hover { background: var(--blekk); color: var(--mint); }
+.pille--mork { background: var(--blekk); color: var(--lys); }
+.pille--mork:hover { background: var(--kull); color: var(--lys); }
+.pille--lys { border-color: var(--lys); color: var(--lys); }
+.pille--lys:hover { background: var(--lys); color: var(--blekk); }
+.pille--krem:hover { color: var(--krem); }
+
+.knapper { display: flex; flex-wrap: wrap; gap: 12px; }
+.knapp {
+  display: inline-flex; align-items: center; justify-content: center;
+  min-height: 44px; padding: 12px 20px;
+  border-radius: 2px; border: 1px solid transparent;
+  font: 600 .875rem/1.2 var(--grotesk);
+  text-decoration: none;
+  transition: background-color .25s var(--fjaer), color .25s var(--fjaer), border-color .25s var(--fjaer), transform .1s ease-out;
+  touch-action: manipulation;
+}
+.knapp--oransje { background: var(--oransje); color: var(--blekk); }
+.knapp--oransje:hover { background: #EC9B5F; }
+.knapp--strek { border-color: var(--lys); color: var(--lys); }
+.knapp--strek:hover { background: var(--lys); color: var(--blekk); }
+.knapp--mork { background: var(--blekk); color: var(--lys); }
+.knapp--mork:hover { background: var(--kull); }
+.knapp--strek-mork { border-color: var(--blekk); color: var(--blekk); }
+.knapp--strek-mork:hover { background: var(--blekk); color: var(--mint); }
+/* Svar på trykket med en gang (pointer-down), ikke når fingeren slipper. */
+.knapp:active, .pille:active { transform: scale(.97); }
+
+/* 1. Mintgrønn topp */
+.topp {
+  background: var(--mint); color: var(--blekk);
+  padding: clamp(20px, 3.4vw, 52px) var(--kant) 0;
+  /* Vinduet stikker opp fra mintflaten; den mørke flaten under fortsetter vinduet. */
+  position: relative;
+}
+.topp__rad { display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; }
+.topp__hoyre { display: flex; flex-wrap: wrap; align-items: center; justify-content: flex-end; gap: 8px 10px; }
+.toppmeny { display: flex; flex-wrap: wrap; gap: 4px 22px; margin-right: 12px; }
+.toppmeny a { font: 500 .875rem/1 var(--grotesk); color: var(--blekk); text-decoration: none; padding: 8px 0; touch-action: manipulation; }
+.toppmeny a:hover { text-decoration: underline; text-underline-offset: 4px; }
+.logo { margin: clamp(28px, 4vw, 56px) 0 0; color: var(--blekk); line-height: 0; }
+.logo img { width: 100%; height: auto; }
+.tre {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;
+  margin-top: clamp(24px, 3.2vw, 44px);
+  font-size: .75rem; line-height: 1.45;
+}
+.tre p { display: flex; flex-direction: column; }
+.tre strong { font-weight: 700; }
+.tre p:nth-child(2) { justify-self: center; }
+.tre p:nth-child(3) { justify-self: end; min-width: 14em; }
+
+.vindu-scene {
+  display: flex; justify-content: center;
+  margin-top: clamp(28px, 3vw, 44px);
+  /* Klipper vinduet i bunnen av mintflaten, så det ser ut som det stiger opp av den. */
+  overflow: hidden;
+  padding-top: 8px;
+}
+.vindu {
+  width: min(900px, 100%);
+  background: var(--blekk); color: var(--lys);
+  border-radius: 6px 6px 0 0;
+  padding: clamp(16px, 1.8vw, 22px) clamp(18px, 2.4vw, 34px) clamp(28px, 3vw, 44px);
+  box-shadow: inset 0 1px 0 rgb(255 255 255 / .08), 0 -10px 30px -18px rgb(31 29 27 / .35);
+  transform: translate3d(0, var(--vindu-y, 0px), 0);
+  will-change: transform;
+}
+.vindu__meny { display: flex; justify-content: space-between; align-items: center; gap: 16px; }
+.vindu__logo { color: var(--mint); display: block; width: 76px; padding: 6px 0; }
+.vindu__logo img { width: 100%; height: auto; }
+.vindu__meny nav { display: flex; align-items: center; gap: clamp(12px, 1.6vw, 22px); font-size: .75rem; }
+.vindu__meny nav a:not(.pille) { text-decoration: none; padding: 8px 0; }
+.vindu__meny nav a:not(.pille):hover { text-decoration: underline; text-underline-offset: 3px; }
+.vindu__innhold { margin-top: clamp(28px, 3.4vw, 48px); }
+.vindu__tittel {
+  margin-top: 12px;
+  font: 400 clamp(2rem, 4.4vw, 4rem)/1.02 var(--serif);
+  letter-spacing: -.02em;
+}
+.vindu__tittel em, .om__stor em, .slik__tittel em { color: var(--mint); }
+.vindu__tekst { margin-top: 18px; max-width: 34rem; font-size: .875rem; line-height: 1.55; color: var(--lys-dempet); }
+.vindu .knapper { margin-top: 24px; }
+
+/* 2. Om Solvei */
+.om {
+  display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 4fr); gap: clamp(32px, 6vw, 110px);
+  padding: clamp(72px, 9vw, 128px) var(--kant) clamp(72px, 9vw, 128px);
+  align-items: start;
+}
+.om__stor {
+  margin-top: 22px;
+  font: 400 clamp(1.75rem, 3vw, 2.75rem)/1.12 var(--serif);
+  letter-spacing: -.012em;
+  max-width: 31ch;
+  text-wrap: pretty;
+}
+.fakta { font-size: .8125rem; line-height: 1.45; }
+.fakta div { border-top: 1px solid var(--strek-lys); padding: 12px 0 14px; }
+.fakta div:last-child { border-bottom: 1px solid var(--strek-lys); }
+.fakta dt { font: 600 .625rem/1.3 var(--grotesk); letter-spacing: .14em; text-transform: uppercase; color: var(--lys-dempet); }
+.fakta dd { margin-top: 4px; }
+
+/* 3. Utfordringen og løsningen */
+.kort-par {
+  display: grid; grid-template-columns: 1fr 1fr; gap: var(--ramme);
+  padding: 0 var(--ramme);
+}
+.kort {
+  position: relative;
+  min-height: clamp(170px, 14vw, 210px); gap: 20px;
+  padding: clamp(22px, 2.2vw, 32px);
+  display: flex; flex-direction: column;
+  border-radius: var(--r);
+}
+.kort--mork { background: var(--kull); }
+.kort--oransje { background: var(--oransje); color: var(--blekk); }
+.kort .etikett { color: inherit; }
+.kort__pil { position: absolute; top: clamp(20px, 2vw, 30px); right: clamp(22px, 2.2vw, 32px); font-size: 1rem; }
+.kort__tittel {
+  margin-top: auto;
+  font: 850 clamp(1.5rem, 2.3vw, 2.125rem)/1.02 var(--feit);
+ 
+  text-transform: uppercase; letter-spacing: -.01em;
+  max-width: 18ch;
+  text-wrap: balance;
+}
+.kort__tekst { margin-top: 14px; max-width: 46ch; font-size: .8125rem; line-height: 1.5; }
+.kort--mork .kort__tekst { color: var(--lys-dempet); }
+
+/* 4. Kremfarget blokk med bildet */
+.krem {
+  margin: var(--ramme);
+  background: var(--krem); color: var(--blekk);
+  padding: clamp(16px, 1.6vw, 22px);
+  border-radius: var(--r);
+}
+.krem__rad { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px; }
+.krem__grid {
+  display: grid; grid-template-columns: minmax(0, 1.12fr) minmax(0, 1fr); gap: clamp(16px, 2.6vw, 40px);
+  margin-top: clamp(16px, 1.6vw, 22px);
+}
+.krem__bilde { overflow: hidden; border-radius: 2px; background: #DDD3C4; aspect-ratio: 4 / 3.3; }
+.krem__bilde img { width: 100%; height: 100%; object-fit: cover; object-position: 45% 62%; display: block; }
+.krem__tekst { display: flex; flex-direction: column; justify-content: space-between; gap: 32px; padding: 4px 4px 8px 0; }
+.krem__topp { display: flex; justify-content: space-between; font: 600 .625rem/1.35 var(--grotesk); letter-spacing: .14em; text-transform: uppercase; }
+.krem__topp span:last-child { text-align: right; }
+.merke { display: inline-flex; align-items: center; justify-content: center; width: 36px; height: 36px; background: var(--lilla); color: var(--blekk); border-radius: 2px; margin-bottom: 18px; }
+.merke img { width: 26px; height: auto; }
+.krem__tittel {
+  font: 400 clamp(2rem, 3.6vw, 3.25rem)/1.04 var(--serif);
+  letter-spacing: -.02em;
+  max-width: 18ch;
+}
+
+/* 5. Tall */
+.tall {
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: clamp(16px, 2.2vw, 32px);
+  padding: clamp(48px, 5vw, 72px) var(--kant) clamp(64px, 7vw, 104px);
+}
+.tall > div { border-top: 1px solid var(--strek-lys); padding-top: clamp(16px, 1.6vw, 24px); }
+.tall__stor { font: 850 clamp(2.5rem, 4.6vw, 4.25rem)/1 var(--feit); letter-spacing: -.03em; font-variant-numeric: tabular-nums; }
+.tall__tekst { margin-top: 12px; font: 600 .625rem/1.35 var(--grotesk); letter-spacing: .14em; text-transform: uppercase; color: var(--lys-dempet); }
+
+/* 6. Slik jobber hun */
+.slik { padding: clamp(64px, 7vw, 104px) 0 clamp(64px, 7vw, 104px); }
+.slik__hode { display: flex; justify-content: space-between; align-items: flex-end; gap: 24px; padding: 0 var(--kant); }
+.slik__tittel { font: 400 clamp(2.75rem, 6vw, 5.5rem)/1 var(--serif); letter-spacing: -.025em; }
+.slik__tittel em { color: inherit; }
+.slik__side { font: 600 .625rem/1.45 var(--grotesk); letter-spacing: .14em; text-transform: uppercase; color: var(--lys-dempet); text-align: right; padding-bottom: 10px; }
+.trinn {
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--ramme);
+  align-items: end;
+  margin-top: clamp(32px, 3vw, 48px);
+  padding: 0 var(--ramme);
+}
+.trinn__kort {
+  display: flex; flex-direction: column; justify-content: space-between;
+  padding: clamp(18px, 1.6vw, 22px);
+  border-radius: var(--r);
+  font-size: .8125rem; line-height: 1.45;
+}
+.trinn--1 { background: var(--kull); min-height: clamp(260px, 23.4vw, 340px); }
+.trinn--2 { background: var(--krem); color: var(--blekk); min-height: clamp(240px, 20.6vw, 300px); }
+.trinn--3 { background: var(--oransje); color: var(--blekk); min-height: clamp(300px, 29vw, 420px); }
+.trinn--4 { background: var(--lilla); color: var(--blekk); min-height: clamp(250px, 22vw, 318px); }
+.trinn__ikon { width: 22px; height: 22px; border: 1.5px solid currentColor; border-radius: 2px; }
+.trinn__nr { font-size: .6875rem; opacity: .8; }
+.trinn h3 { margin: 4px 0 6px; font: 800 1.0625rem/1.15 var(--feit); }
+.trinn--1 p:not(.trinn__nr) { color: var(--lys-dempet); }
+
+/* 7. Kontakt */
+.kontakt {
+  margin: 0 var(--ramme);
+  background: var(--mint); color: var(--blekk);
+  border-radius: var(--r);
+  padding: clamp(40px, 5.2vw, 76px) clamp(24px, 5.2vw, 76px);
+  display: flex; justify-content: space-between; align-items: flex-end; gap: 32px; flex-wrap: wrap;
+}
+.kontakt__tittel { margin-top: 18px; font: 400 clamp(2.75rem, 6vw, 5.25rem)/1 var(--serif); letter-spacing: -.025em; }
+.kontakt__tekst { margin-top: 18px; max-width: 30rem; font-size: .875rem; line-height: 1.55; }
+
+.bunn {
+  padding: 22px var(--kant) 26px;
+  font-size: .6875rem; color: var(--lys-dempet);
+}
+.bunn__rad { display: flex; justify-content: space-between; gap: 6px 16px; flex-wrap: wrap; }
+.bunn__smatt { margin-top: 10px; }
+.bunn a { text-underline-offset: 2px; }
+.bunn a:hover { color: var(--lys); }
+
+/* Fysisk bevegelse: kortene løftes med en fjær i skriptet; her bare startverdier. */
+[data-loft] { transform: translate3d(0, var(--loft-y, 0px), 0); }
+
+/* Mobil og nettbrett */
+@media (max-width: 900px) {
+  .om { grid-template-columns: 1fr; }
+  .tall { grid-template-columns: repeat(2, 1fr); row-gap: 36px; }
+  .trinn { grid-template-columns: repeat(2, 1fr); }
+  .krem__grid { grid-template-columns: 1fr; }
+}
+@media (max-width: 700px) {
+  .tre { grid-template-columns: 1fr; gap: 12px; }
+  .tre p:nth-child(n) { justify-self: start; min-width: 0; }
+  .kort-par { grid-template-columns: 1fr; }
+  .vindu__meny nav a:not(.pille) { display: none; }
+  .vindu { border-radius: 4px 4px 0 0; }
+  .slik__hode { flex-direction: column; align-items: flex-start; }
+  .slik__side { text-align: left; }
+  .kontakt { flex-direction: column; align-items: flex-start; }
+}
+@media (max-width: 520px) {
+  .topp__rad { flex-direction: column-reverse; align-items: stretch; }
+  .topp__hoyre { justify-content: space-between; }
+  .toppmeny { margin-right: auto; gap: 4px 16px; }
+  .trinn { grid-template-columns: 1fr; }
+  .trinn__kort { min-height: 0 !important; gap: 40px; }
+  .krem__rad { flex-direction: column; }
+  .knapper .knapp { flex: 1 1 auto; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .vindu, [data-loft] { transform: none !important; will-change: auto; }
+  .knapp, .pille { transition: background-color .2s ease, color .2s ease; }
+  .knapp:active, .pille:active { transform: none; }
+}
+@media (prefers-contrast: more) {
+  :root { --lys-dempet: var(--lys); --strek-lys: rgb(244 239 231 / .6); }
+}
+@media print {
+  .vindu, [data-loft] { transform: none !important; }
+}
+
+
+/* Toppmeny som følger med: dukker opp når den store logoen er rullet forbi.
+   PC: meny til venstre, liten logo i midten, Logg inn og Book til høyre.
+   Mobil: logo til venstre, Book og Meny-knapp til høyre, menyen åpnes som et panel. */
+.toppbar {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 40;
+  background: var(--mint); color: var(--blekk);
+  border-bottom: 1px solid var(--strek-mork);
+  transform: translate3d(0, -110%, 0);
+  transition: transform .55s var(--fjaer);
+  visibility: hidden;
+}
+.toppbar.er-synlig { transform: none; visibility: visible; }
+.toppbar__rad {
+  display: grid; grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr); align-items: center; gap: 16px;
+  padding: 10px var(--kant);
+}
+.toppbar__meny { display: flex; gap: 22px; }
+.toppbar__meny a { font: 500 .875rem/1 var(--grotesk); color: var(--blekk); text-decoration: none; padding: 10px 0; }
+.toppbar__meny a:hover { text-decoration: underline; text-underline-offset: 4px; }
+.toppbar__logo { display: block; width: 116px; padding: 6px 0; }
+.toppbar__logo img { width: 100%; height: auto; transform: scale(1.9) translate3d(0, 10px, 0); transform-origin: 50% 0; opacity: 0;
+  transition: transform .7s var(--fjaer), opacity .3s ease; }
+.toppbar.er-synlig .toppbar__logo img { transform: none; opacity: 1; }
+.toppbar__cta { display: flex; justify-content: flex-end; align-items: center; gap: 8px; }
+.toppbar__knapp { display: none; appearance: none; border: 1px solid var(--blekk); background: transparent; color: var(--blekk);
+  min-height: 36px; padding: 6px 14px; border-radius: 999px; font: 600 .6875rem/1 var(--grotesk); letter-spacing: .08em; text-transform: uppercase; cursor: pointer; }
+.toppbar__knapp[aria-expanded="true"] { background: var(--blekk); color: var(--mint); }
+.toppbar__panel { display: none; }
+@media (max-width: 700px) {
+  .toppbar__rad { grid-template-columns: auto minmax(0, 1fr); padding: 8px 16px; }
+  .toppbar__meny, .toppbar__cta .pille:not(.pille--mork) { display: none; }
+  .toppbar__logo { width: 84px; order: -1; }
+  .toppbar__logo img { transform-origin: 0 0; }
+  .toppbar__knapp { display: inline-flex; align-items: center; }
+  .toppbar__panel.er-apen { display: flex; flex-direction: column; padding: 6px 16px 20px; border-top: 1px solid var(--strek-mork); }
+  .toppbar__panel a { font: 400 1.75rem/1.1 var(--serif); color: var(--blekk); text-decoration: none; padding: 10px 0; border-bottom: 1px solid var(--strek-mork); }
+  .toppbar__panel a.pille { margin-top: 16px; align-self: flex-start; font: 600 .6875rem/1 var(--grotesk); border-bottom: 1px solid var(--blekk); padding: 6px 16px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .toppbar, .toppbar__logo img { transition: opacity .2s ease; }
+  .toppbar__logo img { transform: none; }
+}
+
+/* Her jobber Solvei i dag: kundelogoer (foreløpig plassholdere) i én lys farge på mørk bunn. */
+.kunder { padding: clamp(56px, 6vw, 96px) var(--kant) clamp(64px, 7vw, 104px); }
+.kunder__tittel { font: 400 clamp(2rem, 3.6vw, 3.25rem)/1.05 var(--serif); letter-spacing: -.02em; }
+.kunder__tittel em { color: var(--mint); }
+.kunder__logoer { list-style: none; margin: clamp(28px, 3vw, 40px) 0 0; padding: 0;
+  display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: clamp(12px, 1.6vw, 24px); }
+.kunder__logoer li { border-top: 1px solid var(--strek-lys); min-height: clamp(84px, 8vw, 112px); display: flex; align-items: center; justify-content: center; padding: 16px 8px 0; }
+.logo-dummy { color: var(--lys); opacity: .62; white-space: nowrap; line-height: 1; }
+.logo-dummy--1 { font: 800 1.0625rem/1 var(--grotesk); letter-spacing: .08em; }
+.logo-dummy--2 { font: italic 400 1.5rem/1 var(--serif); }
+.logo-dummy--3 { font: 300 1.125rem/1 var(--grotesk); letter-spacing: -.01em; }
+.logo-dummy--3 b { font-weight: 700; }
+.logo-dummy--4 { font: 600 .9375rem/1 var(--grotesk); letter-spacing: .22em; }
+.logo-dummy--5 { font: 600 1.375rem/1 var(--serif); letter-spacing: -.01em; }
+.logo-dummy--6 { font: 800 1rem/1 var(--grotesk); letter-spacing: .04em; display: inline-flex; flex-direction: column; align-items: center; gap: 3px; }
+.logo-dummy--6 small { font: 400 .625rem/1 var(--grotesk); letter-spacing: .3em; text-transform: uppercase; }
+@media (max-width: 900px) { .kunder__logoer { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+@media (max-width: 520px) {
+  .kunder__logoer li { min-height: 72px; padding-top: 12px; }
+  .logo-dummy { transform: scale(.82); }
+}
